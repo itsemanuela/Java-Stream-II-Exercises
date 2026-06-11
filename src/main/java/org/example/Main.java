@@ -5,6 +5,8 @@ import entities.Cliente;
 import entities.Ordine;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -89,6 +91,32 @@ public class Main {
 
         System.out.println("*++++++++++++++++BOY PRODUCTS SCONTATI DEL 10%*****************************");
         boyProdotto.forEach(System.out::println);
+
+
+        System.out.println("****************ESERCIZIO STREAM II*************************");
+        System.out.println("-------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------");
+
+        //raggruppo tutti gli ordini per cliente, quindi creo prima lista di tutti gli ordini
+
+        List<Ordine> tuttiGliOrdini= List.of(ordine1, ordine2, ordine3);
+        List<Prodotto> tuttiProdotti= List.of(libro1, libro2, libro3, libro4, libro5, baby2,baby1, baby3);
+
+//utilizzo groupingBy per raggruppare tutti gli ordini quindi apro il Map perchè groupingBy, metodo dei Collector mi restituisce sempre un map. Per raggruppare gli ordini del cliente mi prendo il cliente che diventa la key del map, la lista degli ordini diventa il valore.
+
+        //workflow
+        //map (k-v), variabile, avvio lo stream, collect, raggruppo, stampo.
+
+        Map<Cliente, List<Ordine>> ordiniPerCliente= tuttiGliOrdini.stream().collect(Collectors.groupingBy(Ordine::getCliente));
+        ordiniPerCliente.forEach((cliente, listaOrdini)->   {
+            System.out.println(cliente.getId() + " " + cliente.getNome() + " " + cliente.getTier() + " " + "ORDINI" + listaOrdini);
+        })  ;
+
+
+
+
+
+
 
     }
 
