@@ -4,6 +4,7 @@ import entities.Prodotto;
 import entities.Cliente;
 import entities.Ordine;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -122,6 +123,23 @@ Map<Cliente, Double> totaleSpeso= tuttiGliOrdini.stream().collect(Collectors.gro
 totaleSpeso.forEach((cliente, totaleSpesa)->{
     System.out.println("Cliente: " + cliente.getId() + " " + cliente.getNome()+ " " + "ha speso in totale: " + totaleSpesa);
 });
+
+
+        System.out.println("------------------------------ESERCIZIO TRE-------------------------------------------");
+
+        //devo trovare l'elemento più costoso di tutti i prodotti, quindi ho la necessità di controllare il puù caro partendo dalla lista di prodotti.
+        //utilizzo il metodo sorted del Comparators per ordinarli dal più costoso al meno costoso usando anche reversed.
+        //quindi mi deve tornare una lista il cui parametro deve essere il prodotto controllari e trasportare.
+
+        List<Prodotto> prodottiCostosi= tuttiProdotti.stream().sorted(Comparator.comparing(Prodotto::getPrezzo)).toList().reversed();
+        prodottiCostosi.forEach(System.out::println);
+
+
+
+
+
+
+
 
     }
 
