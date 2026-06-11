@@ -113,10 +113,15 @@ public class Main {
         })  ;
 
 
+        System.out.println("-------------------------SECONDO ESERCIZIO-----------------------");
 
+        //per il secondo esercizio vado ad aggiungere il metodo calculate() nella classe degli ordini prima.
+        System.out.println("---------------TOTALE SPESO PER OGNI CLIENTE------------------");
 
-
-
+Map<Cliente, Double> totaleSpeso= tuttiGliOrdini.stream().collect(Collectors.groupingBy(Ordine::getCliente, Collectors.summingDouble(Ordine::calolaTotale))); //qua richiamo il metodo calcolaTotale messo nella Class Ordine
+totaleSpeso.forEach((cliente, totaleSpesa)->{
+    System.out.println("Cliente: " + cliente.getId() + " " + cliente.getNome()+ " " + "ha speso in totale: " + totaleSpesa);
+});
 
     }
 

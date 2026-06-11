@@ -41,6 +41,13 @@ public class Ordine {
     public void setCliente(Cliente cliente) {this.cliente = cliente;}
 
 
+    //metodo calculate per sommare tutte le cifre degli ordini
+
+    public double calolaTotale(){
+        return this.prodotti.stream().mapToDouble(Prodotto::getPrezzo).sum();
+    }
+
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Ordine{\n");
