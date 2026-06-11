@@ -43,7 +43,7 @@ public class Ordine {
 
     //metodo calculate per sommare tutte le cifre degli ordini
 
-    public double calolaTotale(){
+    public double calcolaTotale(){
         return this.prodotti.stream().mapToDouble(Prodotto::getPrezzo).sum();
     }
 

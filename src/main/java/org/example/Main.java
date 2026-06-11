@@ -3,6 +3,8 @@ package org.example;
 import entities.Prodotto;
 import entities.Cliente;
 import entities.Ordine;
+
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
@@ -119,7 +121,7 @@ public class Main {
         //per il secondo esercizio vado ad aggiungere il metodo calculate() nella classe degli ordini prima.
         System.out.println("---------------TOTALE SPESO PER OGNI CLIENTE------------------");
 
-Map<Cliente, Double> totaleSpeso= tuttiGliOrdini.stream().collect(Collectors.groupingBy(Ordine::getCliente, Collectors.summingDouble(Ordine::calolaTotale))); //qua richiamo il metodo calcolaTotale messo nella Class Ordine
+Map<Cliente, Double> totaleSpeso= tuttiGliOrdini.stream().collect(Collectors.groupingBy(Ordine::getCliente, Collectors.summingDouble(Ordine::calcolaTotale))); //qua richiamo il metodo calcolaTotale messo nella Class Ordine
 totaleSpeso.forEach((cliente, totaleSpesa)->{
     System.out.println("Cliente: " + cliente.getId() + " " + cliente.getNome()+ " " + "ha speso in totale: " + totaleSpesa);
 });
@@ -132,12 +134,23 @@ totaleSpeso.forEach((cliente, totaleSpesa)->{
         //quindi mi deve tornare una lista il cui parametro deve essere il prodotto controllari e trasportare.
 
         List<Prodotto> prodottiCostosi= tuttiProdotti.stream().sorted(Comparator.comparing(Prodotto::getPrezzo)).toList().reversed();
+        System.out.println("------------------------------ECCO I PRODOTTI PREMIUM------------------");
         prodottiCostosi.forEach(System.out::println);
+        System.out.println("--------------------------------------------------------");
+        //mi prendo il prodotto più costoso dal suo indice
+        System.out.println("IL PRODOTTO PIU' COSTOSO E'" + " " + prodottiCostosi.get(0));
 
 
+        System.out.println("-------------------------ESERCIZIO QUATTRO------------------");
+        System.out.println("--------------------------MEDIA SPESA ORDINI-------------------");
 
+        //per ottenere la media degli ordini devo usare il metodo average Double in questo caso(metodo terminale dello stream)
+//con average predno tutti i numeri presenti nello stream e li vado a sommare
 
+double mediaoOrdini= tuttiGliOrdini.stream().collect(Collectors.averagingDouble(Ordine::calcolaTotale));
 
+//workflow eseguito -> ho preso tutti gli ordini, ho aperto lo stream, entro nel collect e prendo il metodo averagingdouble che mi prende la media decimale. Per ogni ordine ho richiamato il metodo che ho creato calcolaTotale per la somma.
+        System.out.println("La media degli importi degli ordini è :" + " " +  mediaoOrdini);
 
 
 
