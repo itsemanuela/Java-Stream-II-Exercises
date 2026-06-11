@@ -3,6 +3,7 @@ package org.example;
 import entities.Prodotto;
 import entities.Cliente;
 import entities.Ordine;
+import jdk.jfr.Category;
 
 import java.sql.SQLOutput;
 import java.time.LocalDate;
@@ -152,7 +153,19 @@ double mediaoOrdini= tuttiGliOrdini.stream().collect(Collectors.averagingDouble(
 //workflow eseguito -> ho preso tutti gli ordini, ho aperto lo stream, entro nel collect e prendo il metodo averagingdouble che mi prende la media decimale. Per ogni ordine ho richiamato il metodo che ho creato calcolaTotale per la somma.
         System.out.println("La media degli importi degli ordini è :" + " " +  mediaoOrdini);
 
+        System.out.println("---------------------------------------ESERCIZIO CINQUE---------------------------");
+        //il quinto esercizio mi chiede di raggruppare i prodotti per categoria e calcolare la somma degli importi per ogni categoria quindi devo utilizzare sia il groupingBy sia summingdouble per la somma totale degli ord per categoria.
+        //quindi mi apro il map per groupingby e mi prendo tutti gli ordini per categoria
 
+        Map<String, Double> totPerCategoria= tuttiProdotti.stream().collect(Collectors.groupingBy(Prodotto::getCategoria, Collectors.summingDouble(Prodotto::getPrezzo)));
+
+        //workflow:
+        //ho preso gli ordini, li ho raggruppati per categoria col Collector groupingBy, per ogni prodotto ho ricavato la sua categoria di corrispondenza, con metodo summing ho sommato ogni prezzo per ogni prodotto di quella categoria
+        //stampo i risultati per vedere la somma degli importi per categoria
+
+        totPerCategoria.forEach((categoria, totalPerCategoria)->{
+            System.out.println("Categoria: " + categoria + " " +  totalPerCategoria);
+        });
 
     }
 
