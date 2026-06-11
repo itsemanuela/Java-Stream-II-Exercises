@@ -108,7 +108,7 @@ public class Main {
 
 //utilizzo groupingBy per raggruppare tutti gli ordini quindi apro il Map perchè groupingBy, metodo dei Collector mi restituisce sempre un map. Per raggruppare gli ordini del cliente mi prendo il cliente che diventa la key del map, la lista degli ordini diventa il valore.
 
-        //workflow
+        //workflow:
         //map (k-v), variabile, avvio lo stream, collect, raggruppo, stampo.
 
         Map<Cliente, List<Ordine>> ordiniPerCliente= tuttiGliOrdini.stream().collect(Collectors.groupingBy(Ordine::getCliente));
